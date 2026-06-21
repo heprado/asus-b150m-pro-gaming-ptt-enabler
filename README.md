@@ -64,7 +64,7 @@ The script will generate a patched CAP file (e.g. `B150MPROGAMING_PTT.CAP`) read
 5. You should see the GUID pattern found in the search bar at the bottom of the window.
 ![GUID Found](./photos/uuid_found.png)
 6. Now go to the setupdata at the tree view and open the Hex View at left corner of the screen, you should see `01` at row `00000390` column `0D`
-![Patched sucessfully](./photos/patch_bios_found.png)
+![Patched sucessfully](./photos/patched_bios_found.png)
 
 
 ### Flashing
