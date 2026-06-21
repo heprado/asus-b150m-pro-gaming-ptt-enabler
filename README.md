@@ -7,11 +7,25 @@ Enables Intel PTT (Platform Trust Technology / TPM 2.0) on the **ASUS B150M Pro 
 
 ---
 
+## Disclaimer
+
+> This project does not distribute modified BIOS files. The patch is applied by the user on the original firmware downloaded directly from ASUS. Use at your own risk. The author is not responsible for any damage to your hardware.
+
+---
+
 ## Why
 
 The ASUS B150M Pro Gaming does not expose the PTT option in its BIOS interface, even on the latest official firmware. However, the firmware **does include the `AsusPTTDxe` module** — PTT support is present but hidden.
 
 This tool patches a single byte in the firmware's NVRAM defaults to expose the **PCH-FW Configuration** menu and enable Firmware TPM (PTT).
+
+---
+
+## How it works
+
+The patch modifies offset `0x389` in the `FE612B72-203C-47B1-8560-A66D946EB371` setupdata section from `0x00` (disabled) to `0x01` (enabled). This is the same variable written by the GRUB `setup_var` method, but baked into the firmware defaults so the option becomes permanently visible in the BIOS interface.
+
+The patch does not modify any executable code — only NVRAM defaults.
 
 ---
 
@@ -22,8 +36,6 @@ You can just edit NVRAM without flashing using [modGRUBShell.efi](https://github
 If you're confident, you can flash your patched BIOS just use the script to generate an patched BIOS using the BIOS Flashing path [BIOS Flashing Method](#bios-flashing).
 
 ---
-
-
 
 ## BIOS Flashing
 
@@ -97,8 +109,6 @@ To verify in Windows: press `Win+R`, type `tpm.msc` — it should show **TPM rea
 
 ---
 
-
-
 ## Alternative — no flash required (temporary)
 
 If you prefer not to modify the firmware, you can enable PTT temporarily using the GRUB shell. The setting persists across reboots but resets if you load BIOS defaults or remove the CMOS battery.
@@ -120,14 +130,6 @@ If you prefer not to modify the firmware, you can enable PTT temporarily using t
 7. Go to **Advanced → PCH-FW Configuration**
 8. Set **TPM Device Selection** to **Firmware TPM**
 9. Press `F10` to save and reboot
-
----
-
-## How it works
-
-The patch modifies offset `0x389` in the `FE612B72-203C-47B1-8560-A66D946EB371` setupdata section from `0x00` (disabled) to `0x01` (enabled). This is the same variable written by the GRUB `setup_var` method, but baked into the firmware defaults so the option becomes permanently visible in the BIOS interface.
-
-The patch does not modify any executable code — only NVRAM defaults.
 
 ---
 
