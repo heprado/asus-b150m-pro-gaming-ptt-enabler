@@ -55,7 +55,7 @@ The script will generate a patched CAP file (e.g. `B150MPROGAMING_PTT.CAP`) read
 ### Checking that the patched BIOS is really patched
 
 1. Download UEFITool [UEFITool](https://github.com/LongSoft/UEFITool/releases) (I'm using the release A74)
-2. Open UEFITool and press CTRL+O, you should see something like this.
+2. Open UEFITool and press CTRL+O, select the patched BIOS file, you should see something like this.
 ![Patched BIOS opened in UEFITool](./photos/patched_bios_opened.png)
 3. Press CTRL+F, you should see an windows like this.
 ![Search](./photos/default_search.png)
