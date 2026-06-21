@@ -15,16 +15,26 @@ This tool patches a single byte in the firmware's NVRAM defaults to expose the *
 
 ---
 
-## Requirements
+## Before Starting
 
-- Python 3.x
-- `UEFIReplace` from [UEFITool NE](https://github.com/LongSoft/UEFITool/releases/tag/0.28.0) — place it in the same folder as the script or add it to PATH
-- The original BIOS CAP file downloaded from the [ASUS support page](https://www.asus.com/motherboards-components/motherboards/all-series/b150m-pro-gaming/helpdesk_bios/)
+You can just edit NVRAM without flashing using [modGRUBShell.efi](https://github.com/datasone/grub-mod-setup_var/releases), it's more safe than flashing your own patched BIOS, if you're not sure about what option to choose, just use the alternative path[Alternative method](#alternative--no-flash-required-temporary).
+
+If you're confident, you can flash your patched BIOS just use the script to generate an patched BIOS using the BIOS Flashing path [BIOS Flashing Method](#bios-flashing).
 
 ---
 
-## Usage
 
+
+## BIOS Flashing
+
+### Requirements
+
+- Python 3.x
+- `UEFIReplace` from [UEFITool NE](https://github.com/LongSoft/UEFITool/releases/tag/0.28.0) — place it in the same folder as the script or add it to PATH
+- `UEFIExtract` from [UEFITool NE](https://github.com/LongSoft/UEFITool/releases/tag/A74) — place it in the same folder as the script or add it to PATH
+- The original BIOS CAP file downloaded from the [ASUS BIOS Download](https://www.asus.com/supportonly/b150m_pro_gaming/helpdesk_bios/)
+
+### Script Usage
 ```bash
 # Windows
 python patch_ptt.py B150MPROGAMING.CAP
@@ -41,9 +51,7 @@ python3 patch_ptt.py B150MPROGAMING.CAP --uefi-replace /path/to/UEFIReplace
 
 The script will generate a patched CAP file (e.g. `B150MPROGAMING_PTT.CAP`) ready to flash.
 
----
-
-## Flashing
+### Flashing
 
 1. Copy the patched `.CAP` to the root of a **FAT32 USB drive**
 2. Enter BIOS (press `Del` on boot)
@@ -51,9 +59,7 @@ The script will generate a patched CAP file (e.g. `B150MPROGAMING_PTT.CAP`) read
 4. Select the USB drive and the `.CAP` file
 5. Confirm and wait for the flash to complete — **do not power off the PC**
 
----
-
-## Enabling PTT after flashing
+### Enabling PTT after flashing
 
 1. Enter BIOS (press `Del` on boot)
 2. Go to **Advanced → PCH-FW Configuration**
@@ -63,6 +69,8 @@ The script will generate a patched CAP file (e.g. `B150MPROGAMING_PTT.CAP`) read
 To verify in Windows: press `Win+R`, type `tpm.msc` — it should show **TPM ready, Specification Version: 2.0**.
 
 ---
+
+
 
 ## Alternative — no flash required (temporary)
 
