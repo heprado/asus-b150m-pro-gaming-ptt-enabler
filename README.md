@@ -31,7 +31,7 @@ The patch does not modify any executable code — only NVRAM defaults.
 
 ## Before Starting
 
-You can just edit NVRAM without flashing using [modGRUBShell.efi](https://github.com/datasone/grub-mod-setup_var/releases), it's more safe than flashing your own patched BIOS, if you're not sure about what option to choose, just use the GRUB setup_vars path[GRUB method](#alternative--no-flash-required-temporary).
+You can just edit NVRAM without flashing using [modGRUBShell.efi](https://github.com/datasone/grub-mod-setup_var/releases), it's more safe than flashing your own patched BIOS, if you're not sure about what option to choose, just use the GRUB setup_vars path [GRUB method](#alternative--no-flash-required-temporary).
 
 If you're confident, you can flash your patched BIOS just use the script to generate an patched BIOS using the BIOS Flashing path [BIOS Flashing Method](#bios-flashing).
 
@@ -130,12 +130,6 @@ If you prefer not to modify the firmware, you can enable PTT temporarily using t
 7. Go to **Advanced → PCH-FW Configuration**
 8. Set **TPM Device Selection** to **Firmware TPM**
 9. Press `F10` to save and reboot
-
----
-
-## Disclaimer
-
-> This project does not distribute modified BIOS files. The patch is applied by the user on the original firmware downloaded directly from ASUS. Use at your own risk. The author is not responsible for any damage to your hardware.
 
 ---
 
