@@ -99,22 +99,7 @@ def find_uefi_extract(custom_path=None):
     sys.exit(1)
 
 
-def win_path(p):
-    if not IS_WINDOWS:
-        return p
-    try:
-        import subprocess as _sp
-        result = _sp.run(["cygpath", "-w", p], capture_output=True, text=True)
-        if result.returncode == 0 and result.stdout.strip():
-            return result.stdout.strip()
-    except FileNotFoundError:
-        pass
-    return os.path.abspath(p)
-
-
 def run(cmd):
-    if IS_WINDOWS:
-        cmd = [win_path(c) if os.sep in c or (len(c) > 2 and c[0] == '/') else c for c in cmd]
     result = subprocess.run(cmd, capture_output=True, text=True)
     return result.stdout, result.stderr, result.returncode
 
@@ -126,7 +111,7 @@ def find_extracted_bin(directory):
     return None
 
 
-# ── Main flow ────────────────────────────────────────────────────────────────
+
 
 def patch_and_replace(cap_file, uefi_extract_path, uefi_replace_path, output_file):
     print(f"[*] OS detected   : {platform.system()} {platform.machine()}")
@@ -141,13 +126,13 @@ def patch_and_replace(cap_file, uefi_extract_path, uefi_replace_path, output_fil
     body_patched = os.path.join(tmpdir, "setupBody_patched.bin")
 
     try:
+
         print("[1/4] Extracting setupdata via UEFIExtract...")
 
         stdout, stderr, rc = run([
             uefi_extract_path, cap_file,
             SETUP_GUID, "-m", "body", "-t", SECTION_TYPE
         ])
-
 
         dump_dir = cap_file + ".dump"
         body_dump = None
@@ -196,7 +181,6 @@ def patch_and_replace(cap_file, uefi_extract_path, uefi_replace_path, output_fil
         with open(body_patched, "wb") as f:
             f.write(body)
 
-        # ── 3. Re-inject into CAP ──────────────────────────────────────────
         print("[3/4] Re-injecting into CAP...")
         stdout, stderr, rc = run([
             uefi_replace_path, cap_file,
@@ -235,8 +219,6 @@ def patch_and_replace(cap_file, uefi_extract_path, uefi_replace_path, output_fil
         shutil.rmtree(tmpdir, ignore_errors=True)
 
 
-# ── CLI ──────────────────────────────────────────────────────────────────────
-
 def main():
     parser = argparse.ArgumentParser(
         description="Enable PTT/TPM 2.0 on the ASUS B150M Pro Gaming by patching the CAP file",
@@ -260,6 +242,8 @@ def main():
         print(f"[ERROR] File not found: {args.cap}")
         sys.exit(1)
 
+    # Always resolve to absolute paths so native tools (e.g. UEFIReplace.exe)
+    # can find the files regardless of how the script was invoked (Git Bash, CMD, etc.)
     cap_abs = os.path.abspath(args.cap)
 
     if args.output:
