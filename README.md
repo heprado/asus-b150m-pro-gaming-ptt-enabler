@@ -23,7 +23,7 @@ This tool patches a single byte in the firmware's NVRAM defaults to expose the *
 
 ## How it works
 
-The patch modifies offset `0x389` in the `FE612B72-203C-47B1-8560-A66D946EB371` setupdata section from `0x00` (disabled) to `0x01` (enabled). This is the same variable written by the GRUB `setup_var` method, but baked into the firmware defaults so the option becomes permanently visible in the BIOS interface.
+The patch modifies offset `0x389` in the `FE612B72-203C-47B1-8560-A66D946EB371` setupdata section from `0x00` (disabled) to `0x01` (enabled). 
 
 The patch does not modify any executable code — only NVRAM defaults.
 
