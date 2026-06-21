@@ -81,7 +81,10 @@ If you prefer not to modify the firmware, you can enable PTT temporarily using t
    setup_var 0x389 0x1
    reboot
    ```
-5. Enter BIOS and set **TPM Device Selection** to **Firmware TPM**
+6. Enter BIOS (press `Del` on boot)
+7. Go to **Advanced → PCH-FW Configuration**
+8. Set **TPM Device Selection** to **Firmware TPM**
+9. Press `F10` to save and reboot
 
 ---
 
