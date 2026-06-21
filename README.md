@@ -51,6 +51,22 @@ python3 patch_ptt.py B150MPROGAMING.CAP --uefi-replace /path/to/UEFIReplace
 
 The script will generate a patched CAP file (e.g. `B150MPROGAMING_PTT.CAP`) ready to flash.
 
+
+### Checking that the patched BIOS is really patched
+
+1. Download UEFITool [UEFITool](https://github.com/LongSoft/UEFITool/releases) (I'm using the release A74)
+2. Open UEFITool and press CTRL+O, you should see something like this.
+![Patched BIOS opened in UEFITool](./photos/patched_bios_opened.png)
+3. Press CTRL+F, you should see an windows like this.
+![Search](./photos/default_search.png)
+4. Click on GUID, and search for `FE612B72-203C-47B1-8560-A66D946EB371`
+![Search GUID](./photos/uuid_search.png)
+5. You should see the GUID pattern found in the search bar at the bottom of the window.
+![GUID Found](./photos/uuid_found.png)
+6. Now go to the setupdata at the tree view and open the Hex View at left corner of the screen, you should see `01` at row `00000390` column `0D`
+![Patched sucessfully](./photos/patch_bios_found.png)
+
+
 ### Flashing
 
 1. Copy the patched `.CAP` to the root of a **FAT32 USB drive**
