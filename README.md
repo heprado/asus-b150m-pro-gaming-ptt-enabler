@@ -31,7 +31,7 @@ The patch does not modify any executable code — only NVRAM defaults.
 
 ## Before Starting
 
-You can just edit NVRAM without flashing using [modGRUBShell.efi](https://github.com/datasone/grub-mod-setup_var/releases), it's more safe than flashing your own patched BIOS, if you're not sure about what option to choose, just use the alternative path[Alternative method](#alternative--no-flash-required-temporary).
+You can just edit NVRAM without flashing using [modGRUBShell.efi](https://github.com/datasone/grub-mod-setup_var/releases), it's more safe than flashing your own patched BIOS, if you're not sure about what option to choose, just use the GRUB setup_vars path[GRUB method](#alternative--no-flash-required-temporary).
 
 If you're confident, you can flash your patched BIOS just use the script to generate an patched BIOS using the BIOS Flashing path [BIOS Flashing Method](#bios-flashing).
 
